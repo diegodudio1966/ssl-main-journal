@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>华体会 · 信息索引页</title>
+    <style>
+        /* 极简留白 · 窄正文 · 清晰层级 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #fbfaf8;
+            color: #2d2a27;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+            line-height: 1.7;
+            padding: 3rem 1.5rem 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 680px;
+            width: 100%;
+        }
+
+        /* 标题层级 */
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            margin: 0.5rem 0 0.2rem;
+            color: #1e1b18;
+        }
+
+        .subhead {
+            font-size: 1rem;
+            color: #7d7872;
+            border-bottom: 1px solid #e5e0da;
+            padding-bottom: 1.2rem;
+            margin-bottom: 2.2rem;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin: 2.5rem 0 1rem;
+            letter-spacing: 0.01em;
+            color: #2b2723;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 32px;
+            height: 2px;
+            background: #cbb7a3;
+            margin-top: 6px;
+            border-radius: 2px;
+        }
+
+        /* 主视觉卡片 (留白+淡影) */
+        .hero-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2.2rem 2rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02), 0 1px 4px rgba(0, 0, 0, 0.02);
+            margin-top: 0.8rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid #edeae6;
+        }
+
+        .hero-card p {
+            font-size: 1.05rem;
+            color: #3f3b37;
+            margin-bottom: 0.8rem;
+        }
+
+        .hero-card .meta-note {
+            display: inline-block;
+            background: #f3efe9;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            color: #6b645c;
+            letter-spacing: 0.02em;
+            margin-top: 0.5rem;
+        }
+
+        /* 卡片网格 (用途卡片) */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 1.8rem 0 0.5rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 1.5rem 1.3rem;
+            border: 1px solid #e8e3dd;
+            transition: box-shadow 0.2s, transform 0.15s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+            transform: translateY(-1px);
+        }
+
+        .card h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+            color: #1e1b18;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #5b5550;
+            line-height: 1.6;
+        }
+
+        .card .tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            background: #eae4dc;
+            color: #544d46;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            margin-top: 0.6rem;
+        }
+
+        /* 人群列表(随性) */
+        .audience-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1rem;
+            margin: 1rem 0 1.8rem;
+        }
+
+        .audience-list li {
+            background: #f2eee9;
+            border-radius: 40px;
+            padding: 0.3rem 1.1rem;
+            font-size: 0.85rem;
+            color: #3f3a35;
+            border: 1px solid #e2dbd3;
+        }
+
+        /* 自然链接段落 */
+        .link-paragraph {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 1.8rem 1.8rem 2rem;
+            margin: 2.2rem 0 1.8rem;
+            border: 1px solid #e5dfd8;
+        }
+
+        .link-paragraph p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: #3b3732;
+        }
+
+        .link-paragraph a {
+            color: #1e4a5e;
+            text-decoration: none;
+            border-bottom: 1px dotted #b3c7d2;
+            font-weight: 450;
+        }
+
+        .link-paragraph a:hover {
+            border-bottom: 1px solid #1e4a5e;
+        }
+
+        /* FAQ 摘要 (极简) */
+        .faq-mini {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e3ddd6;
+        }
+
+        .faq-mini details {
+            margin-bottom: 0.7rem;
+            font-size: 0.9rem;
+        }
+
+        .faq-mini summary {
+            cursor: pointer;
+            color: #3f3a35;
+            font-weight: 450;
+            padding: 0.3rem 0;
+            list-style: none;
+        }
+
+        .faq-mini summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-mini summary::before {
+            content: '▸ ';
+            color: #a39281;
+        }
+
+        .faq-mini details[open] summary::before {
+            content: '▾ ';
+        }
+
+        .faq-mini .answer {
+            color: #5e5750;
+            padding-left: 0.9rem;
+            margin: 0.2rem 0 0.5rem;
+            border-left: 2px solid #dacfc5;
+        }
+
+        /* 页脚 */
+        .footer-note {
+            margin-top: 3rem;
+            font-size: 0.78rem;
+            color: #9a938b;
+            text-align: center;
+            border-top: 1px solid #eee9e3;
+            padding-top: 2rem;
+            letter-spacing: 0.02em;
+        }
+
+        /* 响应式 */
+        @media (max-width: 520px) {
+            body {
+                padding: 2rem 1rem 3rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .hero-card {
+                padding: 1.6rem 1.4rem;
+            }
+
+            .link-paragraph {
+                padding: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- 标题与副线 -->
+    <h1>华体会</h1>
+    <div class="subhead">资料整理 · 信息索引 · 轻介绍</div>
+
+    <!-- 主视觉卡片 (留白叙述) -->
+    <div class="hero-card">
+        <p>在信息碎片里找到一条清晰的线索，是许多人的日常。从内容归档、场景匹配到简单记录，<strong>华体会</strong> 逐渐成为一个被提及的标签。这里不做夸张渲染，只将相关的用途、人群和片段归拢起来，方便你快速了解它指向什么。</p>
+        <p>接下来的卡片摘录了一些常见的使用场景与反馈，它们来自公开资料的梳理，不构成任何建议或承诺。</p>
+        <span class="meta-note">索引更新 · 2025</span>
+    </div>
+
+    <!-- 用途卡片 (信息卡片式) -->
+    <h2>用途卡片</h2>
+    <div class="card-grid">
+        <div class="card">
+            <h3>资料归档</h3>
+            <p>将零散的链接、文档或备忘按照主题聚合，形成可回顾的目录。适合需要定期整理信息的人。</p>
+            <span class="tag">分类 · 归档</span>
+        </div>
+        <div class="card">
+            <h3>场景标记</h3>
+            <p>在浏览或记录时给内容打上标签，之后通过关键词快速定位。常搭配笔记工具或收藏夹使用。</p>
+            <span class="tag">标签 · 检索</span>
+        </div>
+        <div class="card">
+            <h3>轻量索引</h3>
+            <p>为某个主题建立一个简单的索引页，把相关的资源、说明、参考条目汇总在一处，方便分享。</p>
+            <span class="tag">索引 · 汇总</span>
+        </div>
+        <div class="card">
+            <h3>日常记录</h3>
+            <p>记录想法、待办或简短日志，保持信息结构简单。不依赖复杂工具，一个文档就能承载。</p>
+            <span class="tag">记录 · 随笔</span>
+        </div>
+    </div>
+
+    <!-- 适合人群 (列表) -->
+    <h2>适合人群</h2>
+    <ul class="audience-list">
+        <li>整理爱好者</li>
+        <li>笔记收集者</li>
+        <li>轻量项目管理</li>
+        <li>信息囤积症晚期</li>
+        <li>喜欢极简工具的人</li>
+        <li>偶尔需要索引页的用户</li>
+    </ul>
+
+    <!-- 自然链接段落 (将华体会嵌入句子) -->
+    <div class="link-paragraph">
+        <p>如果你正在寻找一个可以承载上述用途的起点，可以了解一下 <a href="https://ssl-main-huatihui.com">华体会</a> 这个站点。它本身保持得比较简约，没有繁复的导航，更像是一个安静的索引面板——把不同功能入口摆在明处，让你按需取用。</p>
+        <p>从资料整理的角度看，很多类似工具的问题在于功能堆砌，而 <a href="https://ssl-main-huatihui.com">华体会</a> 选择了克制。首页以卡片分区，每个区域负责一种动作：浏览、记录或查阅。这种设计对只想快速完成归档的人来说，反而减少了决策成本。</p>
+        <p>当然，任何工具都只是辅助，真正的整理习惯还是取决于个人。如果你对这种「少即是多」的索引方式感到好奇，不妨自己看一眼结构，再判断是否顺手。</p>
+    </div>
+
+    <!-- FAQ 摘要 (轻量) -->
+    <div class="faq-mini">
+        <h2>常见疑问</h2>
+        <details>
+            <summary>华体会 需要注册才能使用吗？</summary>
+            <div class="answer">不需要强制注册。部分功能可能要求登录以保存个人数据，但基础浏览和信息查阅是开放的。</div>
+        </details>
+        <details>
+            <summary>适合团队协作还是个人使用？</summary>
+            <div class="answer">目前更偏向个人场景。团队协作功能有限，但如果你只是共享一个索引链接给同事，完全够用。</div>
+        </details>
+        <details>
+            <summary>有没有移动端适配？</summary>
+            <div class="answer">页面采用响应式设计，手机浏览器可以正常使用。没有独立的 app。</div>
+        </details>
+    </div>
+
+    <!-- 页脚 (留白) -->
+    <div class="footer-note">
+        本页为信息索引页 · 内容基于公开资料整理 · 仅供参考
+    </div>
+
+</div>
+</body>
+</html>
