@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>麻将胡了 · 稳定入口与页面说明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: #f2f9fc;
+            color: #1e2b38;
+            line-height: 1.6;
+            padding: 0 1.5rem 3rem;
+        }
+
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ---------- hero ---------- */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 3.5rem 1rem 2.5rem;
+            background: linear-gradient(145deg, #d9f0f7 0%, #b3dfe8 100%);
+            border-radius: 2.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 12px 28px -8px rgba(0, 90, 100, 0.15);
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: #0e3b4a;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero h1 span {
+            background: #0f6b7a;
+            color: white;
+            padding: 0 0.6rem;
+            border-radius: 40px;
+            display: inline-block;
+            line-height: 1.3;
+        }
+
+        .hero p {
+            max-width: 600px;
+            font-size: 1.15rem;
+            color: #1e4f5c;
+            margin-bottom: 1.8rem;
+            padding: 0 0.5rem;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: rgba(15, 107, 122, 0.08);
+            padding: 0.5rem 1.4rem;
+            border-radius: 60px;
+            font-weight: 500;
+            color: #0a4a57;
+            border: 1px solid #8bcbd9;
+            backdrop-filter: blur(2px);
+        }
+
+        /* ---------- 网格卡片通用 ---------- */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin: 3rem 0 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1.8rem;
+            padding: 1.8rem 1.5rem 1.6rem;
+            box-shadow: 0 4px 14px rgba(0, 70, 80, 0.06);
+            border: 1px solid #d7edf2;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(0, 100, 110, 0.12);
+            border-color: #aad0db;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #0f4c5c;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h3::before {
+            content: "◆";
+            font-size: 1rem;
+            color: #3b9aa8;
+        }
+
+        .card p {
+            font-size: 0.98rem;
+            color: #2c404b;
+            margin-bottom: 0.4rem;
+        }
+
+        .card .meta {
+            font-size: 0.85rem;
+            color: #4a6f7a;
+            border-top: 1px dashed #cde3e9;
+            padding-top: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        /* ---------- 说明区 ---------- */
+        .explain-section {
+            background: #e4f3f7;
+            border-radius: 2rem;
+            padding: 2.2rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .explain-section h2 {
+            font-size: 1.7rem;
+            font-weight: 550;
+            color: #0a3945;
+            margin-bottom: 1rem;
+            border-left: 6px solid #1d8b9b;
+            padding-left: 1rem;
+        }
+
+        .explain-section p {
+            margin-bottom: 1.2rem;
+            color: #1a3e48;
+            font-size: 1rem;
+        }
+
+        .explain-section a {
+            color: #0a6c7a;
+            text-decoration: none;
+            font-weight: 550;
+            border-bottom: 2px solid #7fc1ce;
+            transition: border-color 0.2s;
+        }
+
+        .explain-section a:hover {
+            border-bottom-color: #0a6c7a;
+        }
+
+        /* ---------- FAQ 摘要 ---------- */
+        .faq-summary {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin: 2.5rem 0 1.2rem;
+        }
+
+        .faq-item {
+            flex: 1 1 280px;
+            background: white;
+            padding: 1.2rem 1.5rem 1rem;
+            border-radius: 1.5rem;
+            border: 1px solid #cbe3ea;
+            box-shadow: 0 2px 8px rgba(0, 50, 60, 0.03);
+        }
+
+        .faq-item .q {
+            font-weight: 600;
+            color: #0b4250;
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .faq-item .q::before {
+            content: "Q. ";
+            color: #338a9a;
+        }
+
+        .faq-item .a {
+            color: #254f5b;
+            font-size: 0.92rem;
+            margin-top: 0.25rem;
+        }
+
+        /* ---------- 底部链接 ---------- */
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem 2.5rem;
+            padding: 2rem 0 0.5rem;
+            border-top: 1px solid #c3dce4;
+            margin-top: 2.5rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a {
+            color: #1e6a78;
+            text-decoration: none;
+            border-bottom: 1px dotted #95c2ce;
+        }
+
+        .footer-links a:hover {
+            border-bottom: 2px solid #1e6a78;
+        }
+
+        .footer-note {
+            text-align: center;
+            color: #4f717c;
+            font-size: 0.85rem;
+            margin-top: 1.5rem;
+        }
+
+        /* ---------- 响应式 ---------- */
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .explain-section {
+                padding: 1.6rem 1.2rem;
+            }
+            .grid-cards {
+                grid-template-columns: 1fr;
+            }
+            .faq-summary {
+                flex-direction: column;
+            }
+            body {
+                padding: 0 0.8rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- hero 区 -->
+    <section class="hero">
+        <h1>麻将胡了 · <span>稳定入口</span></h1>
+        <p>从规则到界面，清晰透明的介绍页。不绕弯、不堆砌，只说明与入口相关的内容。</p>
+        <div class="tagline">✔ 页面说明 · 直接入口 · 知识型叙述</div>
+    </section>
+
+    <!-- 优势区：网格卡片 -->
+    <div class="grid-cards">
+        <div class="card">
+            <h3>入口可靠</h3>
+            <p>唯一页面链接，不跳转、不重定向。如需访问，直接使用下方或段落中的链接即可。</p>
+            <div class="meta">直达路径 · 无中间页</div>
+        </div>
+        <div class="card">
+            <h3>结构说明</h3>
+            <p>本页围绕「麻将胡了」站点进行功能介绍与场景描述，帮助新用户快速理解页面定位。</p>
+            <div class="meta">信息前置 · 减少疑惑</div>
+        </div>
+        <div class="card">
+            <h3>蓝绿色点缀</h3>
+            <p>卡片、边框、强调色均采用低饱和青蓝与碧绿色系，视觉友好，适合长时间阅读。</p>
+            <div class="meta">#d9f0f7 · #0f6b7a</div>
+        </div>
+        <div class="card">
+            <h3>移动端优先</h3>
+            <p>响应式栅格与圆角卡片在手机、平板上同样规整，无需缩放即可浏览全部内容。</p>
+            <div class="meta">自适应布局 · 触摸友好</div>
+        </div>
+    </div>
+
+    <!-- 说明区：从稳定入口与页面说明切入 -->
+    <section class="explain-section">
+        <h2>关于稳定入口与页面说明</h2>
+        <p>许多用户在访问某些线上服务时，最先遇到的问题往往是入口分散、信息不一致。本页作为 <strong><a href="https://cns-ssl-mahjong.com">麻将胡了</a></strong> 的固定介绍页，作用就是将最核心的链接与功能解释固定在同一位置。避免收藏夹里的链接失效，也避免通过不可靠的第三方页面跳转。</p>
+        <p>所谓「稳定入口」，指的是我们只使用一个经过验证的域名（https://cns-ssl-mahjong.com），所有关于「麻将胡了」的介绍、FAQ 摘要和场景说明都围绕该链接展开。页面本身不包含广告、弹窗或自动跳转，仅作为知识型落地页存在。</p>
+        <p>另外，本页的说明内容采用分段叙述：从场景出发，解释“什么情况下你会需要这个入口”，再到功能特点和常见问题。每一段都承接上一段的信息，让阅读过程有自然的递进感。</p>
+    </section>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-summary">
+        <div class="faq-item">
+            <span class="q">这个链接直接可用吗？</span>
+            <span class="a">是的，<a href="https://cns-ssl-mahjong.com" style="color:#0a6c7a; border-bottom:1px dashed;">麻将胡了</a> 的域名已配置 SSL，直接打开即可，无需额外操作。</span>
+        </div>
+        <div class="faq-item">
+            <span class="q">页面会频繁变化吗？</span>
+            <span class="a">本介绍页采用固定结构，内容更新时会保留历史说明。入口链接长期不变。</span>
+        </div>
+        <div class="faq-item">
+            <span class="q">适合在什么场景下使用？</span>
+            <span class="a">当你需要向朋友说明功能、收藏入口，或希望快速了解页面定位时，都可以参考本页。</span>
+        </div>
+    </div>
+
+    <!-- 底部链接 -->
+    <div class="footer-links">
+        <a href="https://cns-ssl-mahjong.com">麻将胡了</a>
+        <a href="https://cns-ssl-mahjong.com">麻将胡了</a>
+        <a href="https://cns-ssl-mahjong.com">麻将胡了</a>
+        <a href="https://cns-ssl-mahjong.com">麻将胡了</a>
+    </div>
+    <div class="footer-note">
+        © 介绍页 · 仅作信息说明 · 无诱导内容
+    </div>
+
+</div>
+</body>
+</html>
